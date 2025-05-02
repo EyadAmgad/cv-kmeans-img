@@ -1,6 +1,3 @@
-# Save the README content as a Markdown file
-
-readme_content = """
 ## KMeans Image Clustering with Color Segmentation
 
 This project implements the **K-Means clustering algorithm from scratch** to segment an image into **3 color-coded clusters** using:
