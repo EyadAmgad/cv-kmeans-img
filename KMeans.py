@@ -60,7 +60,7 @@ class KMeans:
 
 def main():
     # Load and convert to RGB
-    img = cv2.imread("vision.jpg")
+    img = cv2.imread("12.jpg")
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     h, w, c = img.shape
@@ -72,9 +72,9 @@ def main():
 
     # Map clusters to white, red, green
     colors = np.array([
-        [255, 255, 255],  # white
-        [255, 0, 0],      # red
-        [0, 255, 0]       # green
+        [255, 0, 0],  # red
+        [255, 255, 255],      # white
+        [0, 0, 0]       # black
     ], dtype=np.uint8)
 
     clustered_img = np.array([colors[label] for label in labels])
@@ -89,10 +89,13 @@ def main():
 
     plt.subplot(1, 2, 2)
     plt.imshow(clustered_img)
-    plt.title("Clustered (White, Red, Green)")
+    plt.title("Clustered (White, Red, Black)")
     plt.axis("off")
     plt.tight_layout()
     plt.show()
+
+    cv2.imwrite("clustered_output.png", clustered_img)
+
 
 if __name__ == "__main__":
     main()
