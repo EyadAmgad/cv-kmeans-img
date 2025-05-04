@@ -12,13 +12,26 @@ class KMeans:
         self.K = K
         self.max_iters = max_iters
 
-    def predict(self, X):
+    def predict(self, X,image_shape = None):
         self.X = X
+        self.image_shape = image_shape
         self.n_samples, self.n_features = X.shape
 
         # Initialize centroids randomly
-        random_idxs = np.random.choice(self.n_samples, self.K, replace=False)
-        self.centroids = [self.X[idx] for idx in random_idxs]
+# Assuming self.X is reshaped from the image with shape (h*w, 3)
+# You need to get indices for 3 selected pixels
+        h, w = self.image_shape  # Save this before calling predict()
+
+# Compute 1D indices from 2D coordinates
+        def to_index(row, col):
+           return row * w + col
+
+        idx_corner = to_index(0, 0)
+        idx_center = to_index(h // 2, w // 2)
+        idx_between = to_index(h // 4, w // 4)
+
+        self.centroids = [self.X[idx_corner], self.X[idx_center], self.X[idx_between]]
+
 
         for _ in range(self.max_iters):
             clusters = self._create_clusters(self.centroids)
@@ -68,13 +81,13 @@ def main():
 
     # Run KMeans with 3 clusters
     kmeans = KMeans(K=3)
-    labels = kmeans.predict(img_flat)
+    labels = kmeans.predict(img_flat,image_shape=(h,w))
 
-    # Map clusters to white, red, green
+    # Map clusters to white, white, green
     colors = np.array([
-        [255, 0, 0],  # red
-        [255, 255, 255],      # white
-        [0, 0, 0]       # black
+        [255, 255, 255],  # white
+        [0, 255, 0],      # green
+        [255, 255, 255]       # white
     ], dtype=np.uint8)
 
     clustered_img = np.array([colors[label] for label in labels])
@@ -89,7 +102,7 @@ def main():
 
     plt.subplot(1, 2, 2)
     plt.imshow(clustered_img)
-    plt.title("Clustered (White, Red, Black)")
+    plt.title("Clustered (White, Red, Green)")
     plt.axis("off")
     plt.tight_layout()
     plt.show()
