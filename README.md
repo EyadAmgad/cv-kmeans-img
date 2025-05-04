@@ -2,7 +2,7 @@
 
 This project implements the **K-Means clustering algorithm from scratch** to segment an image into **3 color-coded clusters** using:
 - **White** `[255, 255, 255]`
-- **Red** `[255, 0, 0]`
+- **White** `[255, 255, 255]`
 - **Green** `[0, 255, 0]`
 
 ---
@@ -18,10 +18,11 @@ This project implements the **K-Means clustering algorithm from scratch** to seg
 
 ### How It Works
 
-1. The input image is loaded and reshaped into a 2D array of RGB pixels.
-2. KMeans groups these pixels into `K=3` clusters based on RGB similarity.
-3. Each cluster is assigned a unique color: white, red, or green.
-4. The clustered image is reshaped and displayed.
+1. Centroids are choses manually due to task specification in order to segemnt the image such that number is displayed 
+2.  The input image is loaded and reshaped into a 2D array of RGB pixels.
+3. KMeans groups these pixels into `K=3` clusters based on RGB similarity.
+4. Each cluster is assigned a unique color: white, white, or green.
+5. The clustered image is reshaped and displayed.
 
 ---
 
