@@ -102,7 +102,7 @@ def main():
 
     plt.subplot(1, 2, 2)
     plt.imshow(clustered_img)
-    plt.title("Clustered (White, Red, Green)")
+    plt.title("Clustered (White, White, Green)")
     plt.axis("off")
     plt.tight_layout()
     plt.show()
